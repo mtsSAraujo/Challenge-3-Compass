@@ -1,0 +1,39 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: admin
+    password: admin
+  h2:
+    console:
+      enabled: true
+
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MSSQLServer
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+
+h2-server:
+  port: 8082
+
+  jpa:
+    hibernate.ddl-auto: create-drop
+    show-sql: true
+
+challenge3:
+  clients:
+    name: post-client
+    url: https://jsonplaceholder.typicode.com
+
+feign:
+  httpclient:
+    disable-ssl-validation: true
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+        loggerLevel: full
+
+
