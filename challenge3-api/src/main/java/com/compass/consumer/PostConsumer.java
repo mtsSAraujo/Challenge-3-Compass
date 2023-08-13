@@ -41,6 +41,7 @@ public class PostConsumer {
     }
 
     @RabbitListener(queues = PostProducer.QUEUE_NAME)
+    @Async
     public void onProcess(final PostMessage message){
         try{
             var initialTime = Instant.now().toEpochMilli();
