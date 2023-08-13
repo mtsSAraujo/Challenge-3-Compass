@@ -30,6 +30,7 @@ allprojects {
 	apply plugin: "java-library"
 	apply plugin: "org.springframework.boot"
 	apply plugin: "io.spring.dependency-management"
+	sourceCompatibility = '17'
 	repositories {
 		mavenCentral()
 	}
@@ -40,6 +41,7 @@ allprojects {
 		annotationProcessor 'org.projectlombok:lombok'
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 		testImplementation 'org.springframework.amqp:spring-rabbit-test'
+		implementation 'com.h2database:h2'
 
 	}
 }
@@ -52,7 +54,6 @@ project(":challenge3-core"){
 		enabled = true
 	}
 	dependencies{
-		implementation 'com.h2database:h2'
 		implementation 'org.springframework.cloud:spring-cloud-starter-openfeign:3.1.5'
 		implementation 'io.github.openfeign:feign-jackson:9.3.1'
 		implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -61,7 +62,7 @@ project(":challenge3-core"){
 
 project(":challenge3-api"){
 	apply plugin: "application"
-	mainClassName = "com.compass.challenge3-api.Main"
+	mainClassName = "com.compass.APIStarter"
 	dependencies{
 		implementation project(":challenge3-core")
 		implementation('org.springframework.boot:spring-boot-starter-web')
@@ -70,14 +71,6 @@ project(":challenge3-api"){
 		}
 		implementation 'org.springframework.boot:spring-boot-starter-webflux'
 		testImplementation 'io.projectreactor:reactor-test'
-	}
-}
-
-project(":challenge3-consumer"){
-	apply plugin: "application"
-	mainClassName = "com.compass.challenge3-consumer.Main"
-	dependencies{
-		implementation project(":challenge3-core")
 	}
 }
 
@@ -90,3 +83,19 @@ dependencyManagement {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+task startApp(type: Exec) {
+	dependsOn 'dockerComposeUp'
+	commandLine './gradlew', ':challenge3-api:run'
+}
+
+task dockerComposeUp(type: Exec) {
+	commandLine 'docker-compose', 'up', '-d'
+}
+
+// Configuração das dependências
+startApp.dependsOn dockerComposeUp
+
+// Configuração da tarefa padrão
+defaultTasks 'startApp'
+
