@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Builder
 @Getter
 @ToString
-public class PostProducerMessage implements Serializable {
+public class PostMessage implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -6849794470754667710L;
