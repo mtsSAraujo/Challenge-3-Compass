@@ -105,10 +105,10 @@ Now you're all set to test the API! To get started, simply run the application a
     - Response:
 ![image](https://legend-nightshade-bd0.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe6c2fec6-e9ff-41e2-bac4-41a001f157f9%2FImage2.png?table=block&id=d04294e7-28e8-4b19-93da-23f14595d087&spaceId=1278aaea-06ee-4326-9268-d987610c5c1c&width=2000&userId=&cache=v2)
 
-    - **`title`**: Can be null or empty depending on the state.
-    - **`body`**: Can be null or empty depending on the state.
-    - **`comments`**: Can be null or empty depending on the state.
-    - **`history`**: Cannot be null or empty; it must always have a value.
+    - title: Can be null or empty depending on the state.
+    - body: Can be null or empty depending on the state.
+    - comments: Can be null or empty depending on the state.
+    - history: Cannot be null or empty; it must always have a value.
     
 ---
 
