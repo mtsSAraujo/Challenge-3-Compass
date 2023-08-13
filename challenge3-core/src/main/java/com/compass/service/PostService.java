@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @RequiredArgsConstructor
@@ -17,16 +19,17 @@ public class PostService {
 
     private final HistoryService historyService;
 
+    private final PostIntegrationService postIntegrationService;
+
     public void processPost(Long postId){
         try {
-            historyService.postFindHistory(postId);
-            historyService.postOKHistory(postId);
-            historyService.commentsFindHistory(postId);
-            historyService.commentsOKHistory(postId);
+            var futurePostDetails = postIntegrationService.returnPostDetails(postId);
+            var futureCommentDetails = postIntegrationService.returnCommentDetails(postId);
+            var joinedFutures = CompletableFuture.allOf(futureCommentDetails, futurePostDetails);
+            joinedFutures.get();
             historyService.enabledHistory(postId);
         }catch(Exception e){
             log.error(e.toString());
-            throw e;
         }
     }
 
