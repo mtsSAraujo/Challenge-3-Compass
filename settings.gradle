@@ -1,0 +1,5 @@
+rootProject.name = 'challenge3'
+include 'challenge3-api'
+include 'challenge3-consumer'
+include 'challenge3-core'
+
