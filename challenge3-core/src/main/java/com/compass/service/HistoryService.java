@@ -5,6 +5,9 @@ import com.compass.entity.Comment;
 import com.compass.entity.History;
 import com.compass.entity.PostRequisition;
 import com.compass.entity.historyStatus.HistoryStatus;
+import com.compass.producers.CreatedProducer;
+import com.compass.producers.PostMessage;
+import com.compass.producers.PostProducer;
 import com.compass.repository.CommentRepository;
 import com.compass.repository.HistoryRepository;
 import com.compass.repository.PostRepository;
@@ -33,11 +36,16 @@ public class HistoryService {
 
     private final CommentRepository commentRepository;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    private final PostProducer postProducer;
+
     public void createHistory(Long postId){
         PostRequisition postRequisition = postRepository.save(new PostRequisition(postId));
         historyRepository.save(new History(Instant.now(), "CREATED", postRequisition));
         postRepository.save(postRequisition);
+
+        final var message = PostMessage.builder()
+                .postId(postId).build();
+        postProducer.sendMessage(message);
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -124,7 +132,7 @@ public class HistoryService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void disabledHistory(Long postId){
 
-        HistoryStatus lastHistoryStatus = findLastElementOnHistory();
+        HistoryStatus lastHistoryStatus = findLastElementOnHistory(postId);
 
         if(lastHistoryStatus.equals(HistoryStatus.FAILED) || lastHistoryStatus.equals(HistoryStatus.ENABLED)){
             History history = new History(Instant.now(), "DISABLED", postRepository.findById(postId)
@@ -142,7 +150,7 @@ public class HistoryService {
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void updatingHistory(Long postId){
 
-        HistoryStatus lastHistoryStatus = findLastElementOnHistory();
+        HistoryStatus lastHistoryStatus = findLastElementOnHistory(postId);
 
         if(lastHistoryStatus.equals(HistoryStatus.DISABLED) || lastHistoryStatus.equals(HistoryStatus.ENABLED)){
             History history = new History(Instant.now(), "UPDATING", postRepository.findById(postId)
@@ -159,7 +167,7 @@ public class HistoryService {
 
     public void failedHistory(Long postId){
 
-        HistoryStatus lastHistoryStatus = findLastElementOnHistory();
+        HistoryStatus lastHistoryStatus = findLastElementOnHistory(postId);
 
 
         if(lastHistoryStatus.equals(HistoryStatus.COMMENTS_FIND) || lastHistoryStatus.equals(HistoryStatus.POST_FIND)){
@@ -174,10 +182,13 @@ public class HistoryService {
         
     }
 
-    public HistoryStatus findLastElementOnHistory(){
-        List<History> historySet = historyRepository.findAll();
+    public HistoryStatus findLastElementOnHistory(Long postId){
 
-        History lastHistoryElement = historySet.get(historySet.size() - 1);
+        PostRequisition postRequisition = postRepository.findById(postId).orElseThrow(() -> new RuntimeException(""));
+
+        Set<History> historySet = postRequisition.getHistory();
+
+        History lastHistoryElement =(History) historySet.toArray()[historySet.toArray().length - 1];
 
         return lastHistoryElement.getStatus();
 
