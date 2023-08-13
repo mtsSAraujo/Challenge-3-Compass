@@ -33,7 +33,6 @@ It's important to note that you should install version 17 or a more recent versi
 
 By verifying the installation of the Java JDK and ensuring that it's at least version 17, you'll be ready to proceed with your development tasks using IntelliJ IDEA.
 
-![image](https://github.com/MateusOK/ecommerce-compass-challenge-1/assets/84550655/e18ad64e-d7d8-4d14-b4dd-d2edc7506c67)
 
 ---
 
@@ -102,7 +101,7 @@ Now you're all set to test the API! To get started, simply run the application a
     - Method: GET
     - Path: /posts
     - Response:
-    ![image](https://legend-nightshade-bd0.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe6c2fec6-e9ff-41e2-bac4-41a001f157f9%2FImage2.png?table=block&id=d04294e7-28e8-4b19-93da-23f14595d087&spaceId=1278aaea-06ee-4326-9268-d987610c5c1c&width=2000&userId=&cache=v2)
+![image](https://legend-nightshade-bd0.notion.site/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fe6c2fec6-e9ff-41e2-bac4-41a001f157f9%2FImage2.png?table=block&id=d04294e7-28e8-4b19-93da-23f14595d087&spaceId=1278aaea-06ee-4326-9268-d987610c5c1c&width=2000&userId=&cache=v2)
     - **`title`**: Can be null or empty depending on the state.
     - **`body`**: Can be null or empty depending on the state.
     - **`comments`**: Can be null or empty depending on the state.
