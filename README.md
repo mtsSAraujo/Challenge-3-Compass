@@ -33,6 +33,8 @@ It's important to note that you should install version 17 or a more recent versi
 
 By verifying the installation of the Java JDK and ensuring that it's at least version 17, you'll be ready to proceed with your development tasks using IntelliJ IDEA.
 
+You'll need to have Docker installed too! so be sure to install Docker and, if using windows, you should also have WSL installed!
+
 
 ---
 
@@ -48,7 +50,17 @@ Make sure to have Postman installed before proceeding with testing the API.
 
 ## All set!
 
-Now you're all set to test the API! To get started, simply run the application and use the endpoints provided below. Enjoy exploring the functionalities!
+Now you're all set to test the API!
+
+### Windows
+
+in your windows terminal use the command: "docker-compose up" and wait for docker to be initialized, once started, just use the command: "./gradlew :challenge3-api:run" the API will start and will be ready for testing!
+Then just use the endpoints provided below. Enjoy exploring the functionalities!
+
+### Linux
+
+For Linux users, just use the command: "chmod +x appStarter.sh" to start the application!
+Then just use the endpoints provided below. Enjoy exploring the functionalities!
 
 ---
 
