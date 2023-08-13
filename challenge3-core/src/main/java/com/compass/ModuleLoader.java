@@ -21,7 +21,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
 @Configuration
 @PropertySources({
         @PropertySource(
-                value = "classpath:application.yml",
+                value = "classpath:application_core.yml",
                 factory = YamlPropertySourceFactory.class)
 })
 public class ModuleLoader {
