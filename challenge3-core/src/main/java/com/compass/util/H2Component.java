@@ -17,20 +17,23 @@ public class H2Component {
     Logger log = LoggerFactory.getLogger(H2Component.class);
     private Server webServer;
 
+
     @Value("${h2-server.port}")
     Integer h2ConsolePort;
 
     @EventListener(ContextRefreshedEvent.class)
     public void start() throws java.sql.SQLException {
-        log.info("starting h2 console at port "+ h2ConsolePort);
-        this.webServer = createWebServer("-webPort", h2ConsolePort.toString(),
-                "-tcpAllowOthers").start();
-        System.out.println(webServer.getURL());
+            log.info("starting h2 console at port " + h2ConsolePort);
+            this.webServer = createWebServer("-webPort", h2ConsolePort.toString(),
+                    "-tcpAllowOthers").start();
+            System.out.println(webServer.getURL());
+
     }
 
     @EventListener(ContextClosedEvent.class)
     public void stop() {
-        log.info("stopping h2 console at port "+h2ConsolePort);
-        this.webServer.stop();
+            log.info("stopping h2 console at port " + h2ConsolePort);
+            this.webServer.stop();
+
     }
 }
