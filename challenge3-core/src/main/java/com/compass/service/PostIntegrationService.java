@@ -1,5 +1,6 @@
 package com.compass.service;
 
+import com.compass.entity.historyStatus.HistoryStatus;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
@@ -29,6 +30,15 @@ public class PostIntegrationService {
             historyService.commentsFindHistory(postId);
             historyService.commentsOKHistory(postId);
             return null;
+        });
+    }
+
+
+    @Async
+    public CompletableFuture<Void> returnLastHistory(Long postId){
+        return CompletableFuture.supplyAsync(() -> {
+                historyService.findLastElementOnHistory(postId).equals(HistoryStatus.ENABLED);
+                return null;
         });
     }
 

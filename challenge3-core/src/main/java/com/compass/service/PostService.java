@@ -1,8 +1,10 @@
 package com.compass.service;
 
 import com.compass.dto.PostRequisitionDTO;
+import com.compass.entity.historyStatus.HistoryStatus;
 import com.compass.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -34,11 +36,11 @@ public class PostService {
 
     public void disablePost(Long postId){
         try {
+            postIntegrationService.returnLastHistory(postId).get();
             historyService.disabledHistory(postId);
         }
         catch(Exception e){
             log.error(e.toString());
-            throw e;
         }
     }
 
@@ -59,7 +61,7 @@ public class PostService {
     }
 
     public boolean checkIfIsOnDB(Long postId){
-        return postRepository.findByExternalId(postId).isEmpty();
+        return postRepository.findById(postId).isEmpty();
     }
 
     public Long findPostById(Long postId){
