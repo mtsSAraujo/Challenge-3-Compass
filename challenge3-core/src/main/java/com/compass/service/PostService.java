@@ -6,6 +6,7 @@ import com.compass.repository.PostRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class PostService {
     }
 
     public void disablePost(Long postId){
+
         try {
             historyService.disabledHistory(postId);
         }

@@ -59,8 +59,14 @@ public class EntityController {
                                                  @Max(value = 100, message = "The ID must be lesser than or equal to 100")
                                                  Long postId){
 
-        postService.disablePost(postId);
-        return ResponseEntity.ok("Post disabled in progress!");
+        if(!postService.checkIfIsOnDB(postId)) {
+            postService.disablePost(postId);
+            return ResponseEntity.ok("Post disabled in progress!");
+        }
+        else{
+            return ResponseEntity.ok("Post ID doesn't exist on Data Base!");
+        }
+
     }
 
     @GetMapping
