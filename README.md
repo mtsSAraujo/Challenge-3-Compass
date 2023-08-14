@@ -59,7 +59,7 @@ Then just use the endpoints provided below. Enjoy exploring the functionalities!
 
 ### Linux
 
-For Linux users, just use the command: "chmod +x appStarter.sh" to start the application!
+For Linux users, use the command: "docker-compose up" to start docker and use the command: "./gradlew :challenge3-api:run" to run the API.
 Then just use the endpoints provided below. Enjoy exploring the functionalities!
 
 ---
