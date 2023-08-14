@@ -33,14 +33,4 @@ public class PostIntegrationService {
         });
     }
 
-
-    @Async
-    public CompletableFuture<Void> returnLastHistory(Long postId){
-        return CompletableFuture.supplyAsync(() -> {
-                historyService.findLastElementOnHistory(postId).equals(HistoryStatus.ENABLED);
-                return null;
-        });
-    }
-
-
 }

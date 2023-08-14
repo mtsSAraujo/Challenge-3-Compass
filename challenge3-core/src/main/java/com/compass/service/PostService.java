@@ -36,7 +36,6 @@ public class PostService {
 
     public void disablePost(Long postId){
         try {
-            postIntegrationService.returnLastHistory(postId).get();
             historyService.disabledHistory(postId);
         }
         catch(Exception e){
