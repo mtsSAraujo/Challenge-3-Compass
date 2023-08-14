@@ -2,7 +2,6 @@ package com.compass.controller;
 
 import com.compass.entity.historyStatus.HistoryStatus;
 import com.compass.producers.CreatedProducer;
-import com.compass.producers.PostProducer;
 import com.compass.producers.PostMessage;
 import com.compass.service.HistoryService;
 import com.compass.service.PostService;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/posts")

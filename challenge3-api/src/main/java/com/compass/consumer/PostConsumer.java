@@ -1,8 +1,8 @@
 package com.compass.consumer;
 
 import com.compass.producers.CreatedProducer;
-import com.compass.producers.PostProducer;
 import com.compass.producers.PostMessage;
+import com.compass.producers.PostProducer;
 import com.compass.repository.PostRepository;
 import com.compass.service.HistoryService;
 import com.compass.service.PostService;
@@ -13,7 +13,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.Date;
 
 @Component
 @RequiredArgsConstructor

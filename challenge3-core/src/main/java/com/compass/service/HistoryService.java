@@ -5,7 +5,6 @@ import com.compass.entity.Comment;
 import com.compass.entity.History;
 import com.compass.entity.PostRequisition;
 import com.compass.entity.historyStatus.HistoryStatus;
-import com.compass.producers.CreatedProducer;
 import com.compass.producers.PostMessage;
 import com.compass.producers.PostProducer;
 import com.compass.repository.CommentRepository;
@@ -19,7 +18,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Instant;
-import java.util.List;
 import java.util.Set;
 
 @Service
