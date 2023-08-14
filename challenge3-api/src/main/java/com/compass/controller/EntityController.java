@@ -78,12 +78,10 @@ public class EntityController {
         if(!postService.checkIfIsOnDB(postId)) {
             postService.reprocessPost(postId);
 
-            Long externalId = postService.findPostById(postId);
-
             HistoryStatus lastHistoryStatus = historyService.findLastElementOnHistory(postId);
 
             if (lastHistoryStatus.equals(HistoryStatus.UPDATING)) {
-                postService.processPost(externalId);
+                postService.processPost(postId);
             }
 
             return ResponseEntity.ok("Post is being reprocessed!");

@@ -133,7 +133,7 @@ public class HistoryService {
         HistoryStatus lastHistoryStatus = findLastElementOnHistory(postId);
 
         if(lastHistoryStatus.equals(HistoryStatus.FAILED) || lastHistoryStatus.equals(HistoryStatus.ENABLED)){
-            History history = new History(Instant.now(), "DISABLED", postRepository.findById(postId)
+            History history = new History(Instant.now(), "DISABLED", postRepository.findByExternalId(postId)
                     .orElseThrow(() -> new RuntimeException("")));
 
             historyRepository.save(history);
@@ -151,7 +151,7 @@ public class HistoryService {
         HistoryStatus lastHistoryStatus = findLastElementOnHistory(postId);
 
         if(lastHistoryStatus.equals(HistoryStatus.DISABLED) || lastHistoryStatus.equals(HistoryStatus.ENABLED)){
-            History history = new History(Instant.now(), "UPDATING", postRepository.findById(postId)
+            History history = new History(Instant.now(), "UPDATING", postRepository.findByExternalId(postId)
                     .orElseThrow(() -> new RuntimeException("")));
 
             historyRepository.save(history);
@@ -182,7 +182,7 @@ public class HistoryService {
 
     public HistoryStatus findLastElementOnHistory(Long postId){
 
-        PostRequisition postRequisition = postRepository.findById(postId).orElseThrow(() -> new RuntimeException(""));
+        PostRequisition postRequisition = postRepository.findByExternalId(postId).orElseThrow(() -> new RuntimeException(""));
 
         Set<History> historySet = postRequisition.getHistory();
 

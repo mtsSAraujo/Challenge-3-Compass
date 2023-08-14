@@ -60,11 +60,11 @@ public class PostService {
     }
 
     public boolean checkIfIsOnDB(Long postId){
-        return postRepository.findById(postId).isEmpty();
+        return postRepository.findByExternalId(postId).isEmpty();
     }
 
     public Long findPostById(Long postId){
-        return postRepository.findById(postId).get().getExternalId();
+        return postRepository.findByExternalId(postId).get().getExternalId();
     }
 
 }
